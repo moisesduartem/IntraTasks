@@ -1,0 +1,136 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.BusinessLogic\\IntraTasks.BusinessLogic.csproj": {}
+  },
+  "projects": {
+    "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.BusinessLogic\\IntraTasks.BusinessLogic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.BusinessLogic\\IntraTasks.BusinessLogic.csproj",
+        "projectName": "IntraTasks.BusinessLogic",
+        "projectPath": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.BusinessLogic\\IntraTasks.BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\devmo\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.BusinessLogic\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\devmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.DataAccess\\IntraTasks.DataAccess.csproj": {
+                "projectPath": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.DataAccess\\IntraTasks.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.409\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.DataAccess\\IntraTasks.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.DataAccess\\IntraTasks.DataAccess.csproj",
+        "projectName": "IntraTasks.DataAccess",
+        "projectPath": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.DataAccess\\IntraTasks.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\devmo\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\IntraTasks\\IntraTasks.Api\\IntraTasks.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\devmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.409\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
