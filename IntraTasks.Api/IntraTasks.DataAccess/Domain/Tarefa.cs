@@ -17,10 +17,14 @@ namespace IntraTasks.DataAccess.Domain
         [Required(ErrorMessage = ErrorMessages.RequiredField)]
         public int ResponsavelId { get; set; }
         public Membro Responsavel { get; set; }
+        
+        /*
         [Required(ErrorMessage = ErrorMessages.RequiredField)]
         public int AutorId { get; set; }
         public Membro Autor { get; set; }
         [Required(ErrorMessage = ErrorMessages.RequiredField)]
+        */
+
         public DateTime Prazo { get; set; }
     }
 }

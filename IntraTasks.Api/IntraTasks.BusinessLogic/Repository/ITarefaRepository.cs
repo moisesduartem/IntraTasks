@@ -6,6 +6,6 @@ namespace IntraTasks.BusinessLogic.Repository
 {
     public interface ITarefaRepository : IRepository<Tarefa>
     {
-        IEnumerable<Tarefa> GetTarefaByAutorId(int autorId);
+        IEnumerable<Tarefa> GetTarefasByResponsavelId(int responsavelId);
     }
 }

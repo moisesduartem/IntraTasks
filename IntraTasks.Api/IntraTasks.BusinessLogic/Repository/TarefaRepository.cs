@@ -9,11 +9,11 @@ namespace IntraTasks.BusinessLogic.Repository
     public class TarefaRepository : Repository<Tarefa>, ITarefaRepository
     {
         public TarefaRepository(AppDbContext context) : base(context)
-        {}
+        { }
 
-        public IEnumerable<Tarefa> GetTarefaByAutorId(int autorId)
+        public IEnumerable<Tarefa> GetTarefasByResponsavelId(int responsavelId)
         {
-            return Get().Where(tarefa => tarefa.AutorId == autorId);
+            return Get().Where(tarefa => tarefa.ResponsavelId == responsavelId);
         }
     }
 }
