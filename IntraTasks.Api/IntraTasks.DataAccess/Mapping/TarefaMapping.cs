@@ -12,9 +12,9 @@ namespace IntraTasks.DataAccess.Mapping
             builder.HasKey(tarefa => tarefa.Id);
             builder.Property(tarefa => tarefa.Titulo);
             builder.Property(tarefa => tarefa.Observacao);
-            builder.Property(tarefa => tarefa.Prazo).HasColumnType("datetime");
-            builder.Property(tarefa => tarefa.CreatedAt).HasColumnType("datetime");
-            builder.Property(tarefa => tarefa.UpdatedAt).HasColumnType("datetime");
+            builder.Property(tarefa => tarefa.Prazo).HasColumnType("datetime2");
+            builder.Property(tarefa => tarefa.CreatedAt).HasColumnType("datetime2");
+            builder.Property(tarefa => tarefa.UpdatedAt).HasColumnType("datetime2");
 
           /*  builder.HasOne(tarefa => tarefa.Autor)
                     .WithMany(autor => autor.Tarefas)

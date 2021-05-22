@@ -1,11 +1,8 @@
 ﻿using IntraTasks.BusinessLogic.Repository;
 using IntraTasks.DataAccess.Domain;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace IntraTasks.UserInterface.Controllers
 {
@@ -24,6 +21,28 @@ namespace IntraTasks.UserInterface.Controllers
         public ActionResult<IEnumerable<Membro>> Get()
         {
             return _uow.MembroRepository.Get().ToList();
+        }
+
+        [HttpGet("{id}", Name = "GetMembroById")]
+        public ActionResult<Membro> Get([FromQuery] int id)
+        {
+            var membro = _uow.MembroRepository.GetById(membro => membro.Id == id);
+
+            if (membro == null)
+            {
+                return NotFound();
+            }
+
+            return membro;
+        }
+
+        [HttpPost]
+        public ActionResult Add([FromBody] Membro membro)
+        {
+            _uow.MembroRepository.Add(membro);
+            _uow.Commit();
+
+            return new CreatedAtRouteResult("GetMembroById", new { id = membro.Id }, membro);
         }
     }
 }

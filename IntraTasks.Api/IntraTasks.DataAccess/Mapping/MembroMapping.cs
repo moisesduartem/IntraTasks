@@ -12,8 +12,8 @@ namespace IntraTasks.DataAccess.Mapping
             builder.HasKey(membro => membro.Id);
             builder.Property(membro => membro.Nome);
             builder.Property(membro => membro.Nascimento);
-            builder.Property(membro => membro.CreatedAt).HasColumnType("datetime");
-            builder.Property(membro => membro.UpdatedAt).HasColumnType("datetime");
+            builder.Property(membro => membro.CreatedAt).HasColumnType("datetime2");
+            builder.Property(membro => membro.UpdatedAt).HasColumnType("datetime2");
 
             /* builder.HasMany(membro => membro.Tarefas)
                    .WithOne(tarefa => tarefa.Autor)
