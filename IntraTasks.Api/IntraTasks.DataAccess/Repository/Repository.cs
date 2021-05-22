@@ -29,7 +29,7 @@ namespace IntraTasks.DataAccess.Repository
             return _context.Set<T>().AsNoTracking();
         }
 
-        public T GetById(Expression<Func<T, bool>> predicate)
+        public T GetByCondition(Expression<Func<T, bool>> predicate)
         {
             return Get().FirstOrDefault(predicate);
         }

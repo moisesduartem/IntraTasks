@@ -34,7 +34,7 @@ namespace IntraTasks.UserInterface.Controllers
         [HttpGet("{id}")]
         public ActionResult<T> Get(int id)
         {
-            var entity = _mainRepository.GetById(e => e.Id == id);
+            var entity = _mainRepository.GetByCondition(e => e.Id == id);
 
             if (entity == null)
             {
@@ -56,7 +56,7 @@ namespace IntraTasks.UserInterface.Controllers
         [HttpPut]
         public ActionResult Update([FromBody] T data)
         {
-            var entity = _mainRepository.GetById(m => m.Id == data.Id);
+            var entity = _mainRepository.GetByCondition(m => m.Id == data.Id);
 
             if (entity == null)
             {
@@ -74,7 +74,7 @@ namespace IntraTasks.UserInterface.Controllers
         [HttpDelete("{id}")]
         public ActionResult Remove(int id)
         {
-            var entity = _mainRepository.GetById(e => e.Id == id);
+            var entity = _mainRepository.GetByCondition(e => e.Id == id);
 
             if (entity == null)
             {
