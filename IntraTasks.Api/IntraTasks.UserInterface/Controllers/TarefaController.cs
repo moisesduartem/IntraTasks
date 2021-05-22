@@ -6,9 +6,9 @@ namespace IntraTasks.UserInterface.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MembroController : GenericController<Membro>
+    public class TarefaController : GenericController<Tarefa>
     {
-        public MembroController(IUnitOfWork uow) : base(uow, uow.MembroRepository)
+        public TarefaController(IUnitOfWork uow) : base(uow, uow.TarefaRepository)
         { }
     }
 }
