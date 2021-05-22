@@ -2,12 +2,17 @@
 using IntraTasks.DataAccess.Domain;
 using IntraTasks.DataAccess.Repository;
 using IntraTasks.DataAccess.ValueObjects;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace IntraTasks.UserInterface.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    [ApiExplorerSettings]
     public class GenericController<T> : ControllerBase where T : BaseEntity
     {
         protected readonly IUnitOfWork _uow;
@@ -20,18 +25,23 @@ namespace IntraTasks.UserInterface.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<T>> Get()
+        [EnableQuery]
+        [ODataRoute]
+        public IActionResult Get()
         {
             var data = _mainRepository.Get().ToList();
+
             if (data.Count > 0)
             {
-                return Ok(ResponseFactory.Successfully<IEnumerable<T>>(data));
+                return Ok(data);
             }
 
             return NotFound(ResponseFactory.NotFound<T>());
         }
 
         [HttpGet("{id}")]
+        [EnableQuery]
+        [ODataRoute]
         public ActionResult<T> Get(int id)
         {
             var entity = _mainRepository.GetByCondition(e => e.Id == id);
