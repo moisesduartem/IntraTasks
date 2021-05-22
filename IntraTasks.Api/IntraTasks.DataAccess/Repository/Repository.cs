@@ -24,11 +24,6 @@ namespace IntraTasks.DataAccess.Repository
             _context.Set<T>().Add(entity);
         }
 
-        public void Delete(T entity)
-        {
-            _context.Set<T>().Remove(entity);
-        }
-
         public IQueryable<T> Get()
         {
             return _context.Set<T>().AsNoTracking();
@@ -36,7 +31,7 @@ namespace IntraTasks.DataAccess.Repository
 
         public T GetById(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().AsNoTracking().FirstOrDefault(predicate);
+            return Get().FirstOrDefault(predicate);
         }
 
         public void Update(T entity)
@@ -45,5 +40,11 @@ namespace IntraTasks.DataAccess.Repository
             _context.Entry(entity).State = EntityState.Modified;
             _context.Update(entity);
         }
+
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
     }
 }
