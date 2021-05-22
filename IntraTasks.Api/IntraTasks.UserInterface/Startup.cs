@@ -62,7 +62,7 @@ namespace IntraTasks.UserInterface
             app.UseMvc(options =>
             {
                 options.EnableDependencyInjection();
-                options.Expand().Select().Count().OrderBy().Filter().SkipToken();
+                options.Expand().Select().Count().OrderBy().Filter().SkipToken().MaxTop(100);
                 options.MapODataServiceRoute("odata", "odata", GetODataBuilder().GetEdmModel());
             });
         }
