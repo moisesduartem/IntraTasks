@@ -7,12 +7,13 @@ namespace IntraTasks.DataAccess.Domain
 {
     public class Membro : BaseEntity
     {
-        [Required(ErrorMessage = ErrorMessages.RequiredField)]
-        [MinLength(2)]
-        [MaxLength(155)]
+        [Required(ErrorMessage = ErrorMessages.Required)]
+        [MinLength(2, ErrorMessage = ErrorMessages.MinLength)]
+        [MaxLength(155, ErrorMessage = ErrorMessages.MaxLength)]
         public string Nome { get; set; }
-        [Required(ErrorMessage = ErrorMessages.RequiredField)]
-        public DateTime Nascimento { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.Required)]
+        public DateTime? Nascimento { get; set; }
         public ICollection<Tarefa> Tarefas { get; set; } = new List<Tarefa>();
     }
 }
