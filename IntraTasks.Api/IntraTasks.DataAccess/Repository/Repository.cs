@@ -36,13 +36,12 @@ namespace IntraTasks.DataAccess.Repository
 
         public T GetById(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().FirstOrDefault(predicate);
+            return _context.Set<T>().AsNoTracking().FirstOrDefault(predicate);
         }
 
         public void Update(T entity)
         {
             entity.UpdatedAt = DateTime.Now;
-
             _context.Entry(entity).State = EntityState.Modified;
             _context.Update(entity);
         }
