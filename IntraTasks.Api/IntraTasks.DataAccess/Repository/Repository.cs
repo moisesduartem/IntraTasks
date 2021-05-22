@@ -1,4 +1,5 @@
 ﻿using IntraTasks.DataAccess.Context;
+using IntraTasks.DataAccess.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace IntraTasks.DataAccess.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected AppDbContext _context;
 
@@ -17,6 +18,9 @@ namespace IntraTasks.DataAccess.Repository
 
         public void Add(T entity)
         {
+            entity.CreatedAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
+
             _context.Set<T>().Add(entity);
         }
 
@@ -37,6 +41,8 @@ namespace IntraTasks.DataAccess.Repository
 
         public void Update(T entity)
         {
+            entity.UpdatedAt = DateTime.Now;
+
             _context.Entry(entity).State = EntityState.Modified;
             _context.Update(entity);
         }
