@@ -44,5 +44,21 @@ namespace IntraTasks.UserInterface.Controllers
 
             return new CreatedAtRouteResult("GetMembroById", new { id = membro.Id }, membro);
         }
+
+        [HttpPut]
+        public ActionResult Update([FromBody] Membro membro)
+        {
+            var item = _uow.MembroRepository.GetById(m => m.Id == membro.Id);
+            
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            _uow.MembroRepository.Update(membro);
+            _uow.Commit();
+
+            return Ok();
+        }
     }
 }
