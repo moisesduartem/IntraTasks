@@ -1,97 +1,71 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {ScrollView, Text, View} from 'react-native';
-import {colors, FAB, ListItem} from 'react-native-elements';
-import {Icon} from 'react-native-elements';
+import {ScrollView, Text} from 'react-native';
+import {colors, ListItem} from 'react-native-elements';
+import {ListItemFab} from '../../components/ListItemFab';
+import {api} from '../../services/api';
 
-import {situacoes, tarefas} from '../../services/data/mocked';
+import * as S from './style';
 
-function getSituacaoById(id) {
-  return situacoes.filter((el, i) => el.id === id)[0];
+function getSituacao(id) {
+  switch (id) {
+    case 2:
+      return 'Feito';
+    default:
+      return 'Pendente';
+  }
 }
 
 function TarefasScreen() {
-  const buttonsSize = 15;
+  const [items, setItems] = useState([]);
+
+  async function fetchItems() {
+    try {
+      const response = await api.get('/odata/Tarefa?$count=true');
+      setItems(response.data);
+    } catch (err) {
+      // Alert.alert('Não foi possível listar as tarefas...');
+    }
+  }
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
   return (
     <ScrollView>
-      {tarefas.map((e, i) => (
-        <ListItem key={i} style={styles.listItem} bottomDivider>
-          <View style={styles.card}>
-            <View style={styles.cardBody}>
-              <Text style={styles.taskTitle}>{e.titulo}</Text>
-              <Text style={styles.situacao(e)}>
-                {getSituacaoById(e.situacaoId).nome}
-              </Text>
-              {e.observacao && (
-                <View style={styles.obsContainer}>
-                  <Text style={styles.obsText}>Observação</Text>
-                  <Text>{e.observacao}</Text>
-                </View>
-              )}
-            </View>
-            <View style={styles.itemOptions}>
-              <FAB
-                icon={
-                  <Icon
-                    color="white"
-                    size={buttonsSize}
-                    name="trash"
-                    type="font-awesome"
-                  />
-                }
-                size="small"
-                style={styles.fab}
-                color={colors.error}
-              />
-              <FAB
-                icon={
-                  <Icon
-                    color="white"
-                    size={buttonsSize}
-                    name="pencil"
-                    type="font-awesome"
-                  />
-                }
-                size="small"
-                style={styles.fab}
-                color={colors.primary}
-              />
-              <FAB
-                icon={
-                  <Icon
-                    color="white"
-                    size={buttonsSize}
-                    name="eye"
-                    type="font-awesome"
-                  />
-                }
-                size="small"
-                style={styles.fab}
-                color={colors.black}
-              />
-            </View>
-          </View>
-        </ListItem>
-      ))}
+      {items &&
+        items?.value?.map((e, i) => (
+          <ListItem key={i} bottomDivider>
+            <S.Card.Container>
+              <S.Card.Body>
+                <S.Task.Title>{e.Titulo}</S.Task.Title>
+                <S.Task.Situation situation={e.situacaoId}>
+                  {getSituacao(e.situacaoId)}
+                </S.Task.Situation>
+                {e.observacao && (
+                  <S.Note.Container>
+                    <S.Note.Text>Observação</S.Note.Text>
+                    <Text>{e.observacao}</Text>
+                  </S.Note.Container>
+                )}
+              </S.Card.Body>
+              <S.Item.Options>
+                <S.Item.Button>
+                  <ListItemFab icon="trash" color={colors.error} />
+                </S.Item.Button>
+                <S.Item.Button>
+                  <ListItemFab icon="pencil" color={colors.primary} />
+                </S.Item.Button>
+                <S.Item.Button>
+                  <ListItemFab icon="eye" color={colors.black} />
+                </S.Item.Button>
+              </S.Item.Options>
+            </S.Card.Container>
+          </ListItem>
+        ))}
     </ScrollView>
   );
 }
-
-const styles = {
-  taskTitle: {fontSize: 20},
-  card: {padding: 5},
-  cardBody: {paddingVertical: 10},
-  itemOptions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    width: '100%',
-  },
-  obsContainer: {paddingVertical: 10},
-  obsText: {fontSize: 16, fontWeight: '700'},
-  listItem: {marginVertical: 5},
-  fab: {marginHorizontal: 5},
-  situacao: e => ({color: e.situacaoId === 1 ? colors.error : colors.success}),
-};
 
 export {TarefasScreen};
