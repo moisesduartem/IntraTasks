@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import {ScrollView, Text} from 'react-native';
+import {Alert, ScrollView, Text} from 'react-native';
 import {colors, ListItem} from 'react-native-elements';
 import {AppScreen} from '../../components/AppScreen';
 import {ListItemFab} from '../../components/ListItemFab';
@@ -20,14 +20,19 @@ function getSituacao(id) {
 function TarefasScreen() {
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
+  const [message, setMessage] = useState(null);
 
   async function fetchItems() {
     try {
+      setLoading(true);
       const response = await api.get('/odata/Tarefa?$count=true');
-      setTimeout(() => setItems(response.data), 100);
-      setLoading(items?.value?.length <= 0);
+      setTimeout(() => setItems(response.data), 50);
+      setMessage(null);
+      setLoading(false);
     } catch (err) {
-      // Alert.alert('Não foi possível listar as tarefas...');
+      setMessage('Sem registros no momento...');
+      setItems([]);
+      setLoading(false);
     }
   }
 
@@ -36,27 +41,56 @@ function TarefasScreen() {
     fetchItems();
   }, []);
 
+  function handleDeleteTask(task) {
+    async function sendRequest(taskId) {
+      setLoading(true);
+      const {data} = await api.delete(`/api/Tarefa/${taskId}`);
+      Alert.alert(data.message);
+      if (data.successfully) {
+        fetchItems();
+      }
+    }
+
+    Alert.alert(
+      `Tem certeza que deseja deletar a tarefa "${task.Titulo}"?`,
+      '',
+      [
+        {
+          text: 'Não',
+        },
+        {
+          text: 'Sim',
+          onPress: () => sendRequest(task.Id.toString()),
+        },
+      ],
+    );
+  }
+
   return (
-    <AppScreen loading={loading}>
+    <AppScreen loading={loading} message={message}>
       <ScrollView>
-        {items?.value?.map((e, i) => (
+        {items?.value?.map((task, i) => (
           <ListItem key={i} bottomDivider>
             <S.Card.Container>
               <S.Card.Body>
-                <S.Task.Title>{e.Titulo}</S.Task.Title>
-                <S.Task.Situation situation={e.situacaoId}>
-                  {getSituacao(e.situacaoId)}
+                <S.Task.Title>{task.Titulo}</S.Task.Title>
+                <S.Task.Situation situation={task.SituacaoId}>
+                  {getSituacao(task.SituacaoId)}
                 </S.Task.Situation>
-                {e.observacao && (
+                {task.observacao && (
                   <S.Note.Container>
                     <S.Note.Text>Observação</S.Note.Text>
-                    <Text>{e.observacao}</Text>
+                    <Text>{task.Observacao}</Text>
                   </S.Note.Container>
                 )}
               </S.Card.Body>
               <S.Item.Options>
                 <S.Item.Button>
-                  <ListItemFab icon="trash" color={colors.error} />
+                  <ListItemFab
+                    onPress={() => handleDeleteTask(task)}
+                    icon="trash"
+                    color={colors.error}
+                  />
                 </S.Item.Button>
                 <S.Item.Button>
                   <ListItemFab icon="pencil" color={colors.primary} />

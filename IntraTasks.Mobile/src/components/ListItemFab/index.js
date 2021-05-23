@@ -9,9 +9,11 @@ export function ListItemFab({
   color = colors.primary,
   buttonSize = 15,
   size = 'small',
+  ...rest
 }) {
   return (
     <FAB
+      {...rest}
       icon={
         <Icon
           color="white"
