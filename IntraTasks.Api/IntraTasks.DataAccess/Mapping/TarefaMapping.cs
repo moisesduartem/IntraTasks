@@ -8,7 +8,7 @@ namespace IntraTasks.DataAccess.Mapping
     {
         public void Configure(EntityTypeBuilder<Tarefa> builder)
         {
-            builder.ToTable("Tarefa");
+            builder.ToTable(nameof(Tarefa));
             builder.HasKey(tarefa => tarefa.Id);
             builder.Property(tarefa => tarefa.Titulo);
             builder.Property(tarefa => tarefa.Observacao);
@@ -22,7 +22,7 @@ namespace IntraTasks.DataAccess.Mapping
                       .WithMany(autor => autor.Tarefas)
                       .HasForeignKey(tarefa => tarefa.AutorId); */
 
-            builder.HasOne(tarefa => tarefa.Responsavel)
+            builder.HasOne<Membro>(tarefa => tarefa.Responsavel)
                     .WithMany(responsavel => responsavel.Tarefas)
                     .HasForeignKey(tarefa => tarefa.ResponsavelId);
         }

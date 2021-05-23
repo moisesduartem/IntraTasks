@@ -1,6 +1,7 @@
 ﻿using IntraTasks.DataAccess.ValueObjects;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IntraTasks.DataAccess.Domain
 {
@@ -16,6 +17,7 @@ namespace IntraTasks.DataAccess.Domain
         public string Observacao { get; set; }
         public SituacaoTarefa Situacao { get; set; } = SituacaoTarefa.Pendente;
 
+        [ForeignKey("Membro")]
         [Required(ErrorMessage = ErrorMessages.Required)]
         public int ResponsavelId { get; set; }
         public Membro Responsavel { get; set; }

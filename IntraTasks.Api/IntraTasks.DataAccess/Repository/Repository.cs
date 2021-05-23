@@ -24,7 +24,7 @@ namespace IntraTasks.DataAccess.Repository
             _context.Set<T>().Add(entity);
         }
 
-        public IQueryable<T> Get()
+        public virtual IQueryable<T> Get()
         {
             return _context.Set<T>().AsNoTracking();
         }

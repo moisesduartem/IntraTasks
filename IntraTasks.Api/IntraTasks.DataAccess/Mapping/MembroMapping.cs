@@ -8,7 +8,7 @@ namespace IntraTasks.DataAccess.Mapping
     {
         public void Configure(EntityTypeBuilder<Membro> builder)
         {
-            builder.ToTable("Membro");
+            builder.ToTable(nameof(Membro));
             builder.HasKey(membro => membro.Id);
             builder.Property(membro => membro.Nome);
             builder.Property(membro => membro.Nascimento);

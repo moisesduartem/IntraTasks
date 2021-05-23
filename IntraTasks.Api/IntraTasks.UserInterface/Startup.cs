@@ -71,8 +71,8 @@ namespace IntraTasks.UserInterface
         {
             ODataModelBuilder builder = new ODataConventionModelBuilder();
             
-            builder.EntitySet<Membro>("Membro");
-            builder.EntitySet<Tarefa>("Tarefa");
+            builder.EntitySet<Membro>(nameof(Membro));
+            builder.EntitySet<Tarefa>(nameof(Tarefa));
 
             return builder;
         }
