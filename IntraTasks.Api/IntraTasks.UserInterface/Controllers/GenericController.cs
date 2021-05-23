@@ -5,7 +5,6 @@ using IntraTasks.DataAccess.ValueObjects;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace IntraTasks.UserInterface.Controllers
@@ -37,21 +36,6 @@ namespace IntraTasks.UserInterface.Controllers
             }
 
             return NotFound(ResponseFactory.NotFound<T>());
-        }
-
-        [HttpGet("{id}")]
-        [EnableQuery]
-        [ODataRoute]
-        public ActionResult<T> Get(int id)
-        {
-            var entity = _mainRepository.GetByCondition(e => e.Id == id);
-
-            if (entity == null)
-            {
-                return NotFound(ResponseFactory.NotFound<T>());
-            }
-
-            return Ok(ResponseFactory.Successfully<T>(entity));
         }
 
         [HttpPost]
