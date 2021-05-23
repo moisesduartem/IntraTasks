@@ -1,0 +1,31 @@
+-- SQL SERVER QUERIES FOR DATABASE FIRST
+
+CREATE TABLE [Membro] (
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[Nome] NVARCHAR(155) NOT NULL,
+	[Nascimento] DATETIME2 NOT NULL,
+	[CreatedAt] DATETIME2,
+	[UpdatedAt] DATETIME2
+);
+
+GO
+
+CREATE TABLE [Tarefa] (
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[Titulo] NVARCHAR(155) NOT NULL,
+	[Observacao] TEXT,
+	[Situacao] INT NOT NULL DEFAULT 1,
+	[ResponsavelId] INT NOT NULL,
+	-- [AutorId] INT NOT NULL,
+	[Prazo] DATETIME2 NOT NULL,
+	[CreatedAt] DATETIME2,
+	[UpdatedAt] DATETIME2
+);
+
+GO
+
+ALTER TABLE [dbo].[Tarefa]  WITH CHECK ADD FOREIGN KEY([ResponsavelId])
+REFERENCES [dbo].[Membro] ([Id])
+
+-- ALTER TABLE [dbo].[Tarefa]  WITH CHECK ADD FOREIGN KEY([AutorId])
+-- REFERENCES [dbo].[Membro] ([Id])
