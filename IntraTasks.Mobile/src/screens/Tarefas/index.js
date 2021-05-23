@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {ScrollView, Text} from 'react-native';
 import {colors, ListItem} from 'react-native-elements';
+import {AppScreen} from '../../components/AppScreen';
 import {ListItemFab} from '../../components/ListItemFab';
 import {api} from '../../services/api';
 
@@ -17,25 +18,28 @@ function getSituacao(id) {
 }
 
 function TarefasScreen() {
+  const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
 
   async function fetchItems() {
     try {
       const response = await api.get('/odata/Tarefa?$count=true');
-      setItems(response.data);
+      setTimeout(() => setItems(response.data), 100);
+      setLoading(items?.value?.length <= 0);
     } catch (err) {
       // Alert.alert('Não foi possível listar as tarefas...');
     }
   }
 
   useEffect(() => {
+    setItems([]);
     fetchItems();
   }, []);
 
   return (
-    <ScrollView>
-      {items &&
-        items?.value?.map((e, i) => (
+    <AppScreen loading={loading}>
+      <ScrollView>
+        {items?.value?.map((e, i) => (
           <ListItem key={i} bottomDivider>
             <S.Card.Container>
               <S.Card.Body>
@@ -64,7 +68,8 @@ function TarefasScreen() {
             </S.Card.Container>
           </ListItem>
         ))}
-    </ScrollView>
+      </ScrollView>
+    </AppScreen>
   );
 }
 
